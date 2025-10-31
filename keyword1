@@ -1,0 +1,89 @@
+final Keyword
+The final keyword in Java is used with variables, methods and also with classes to restrict modification.
+
+final int b = 100; 
+
+class A {
+    public static void main(String[] args)
+    {
+        // Non final variable
+        int a = 5;
+
+        // final variable
+        final int b = 6;
+
+        // modifying the non final variable
+        a++;
+
+        // modifying the final variable Immediately gives Compile Time error
+        b++;
+    }
+}
+Note: If we declare any variable as final, we can't modify its value. 
+Attempting to do so results in a compile-time error.
+
+finally Keyword
+The finally keyword in Java is used to create a block of code that always executes after the try block, regardless of whether an exception occurs or not.
+
+Syntax
+try {
+    // Code that might throw an exception
+} catch (ExceptionType e) {
+    // Code to handle the exception
+} finally {
+    // Code that will always execute
+}
+
+public class Geeks {
+    public static void main(String[] args)
+    {
+        try {
+            System.out.println("Inside try block");
+            int result
+                = 10 / 0; // This will cause an exception
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Exception caught: "
+                               + e.getMessage());
+        }
+        finally {
+            System.out.println("finally block always execute");
+        }
+    }
+}
+
+Explanation: The try block attempts a division by zero, causing an ArithmeticException. The finally block executes, whether an exception occurs, ensuring cleanup or mandatory code execution.
+
+finalize() Method
+The finalize() method is called by the Garbage Collector just before an object is removed from memory. 
+It allows us to perform clean up activity. Once the finalize() method completes, Garbage Collector destroys that object.finalize method is present in the Object class.
+
+Syntax:
+
+protected void finalize() throws Throwable{}
+import java.util.*;
+public class Geeks {
+    public static void main(String[] args)
+    {
+        Geeks g = new Geeks();
+        System.out.println("Hashcode is: " + g.hashCode());
+        // Making the object eligible for garbage collection
+        g = null;
+        System.gc();
+        // Adding a short delay to allow GC to act
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("End of the garbage collection");
+    }
+
+    // Defining the finalize method
+    @Override protected void finalize()
+    {
+        System.out.println("Called the finalize() method");
+    }
+}
